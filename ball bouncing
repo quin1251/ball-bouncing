@@ -1,0 +1,115 @@
+float l= random(0,255);
+float m= random(0,255);
+float n= random(0,255);//random colour
+
+float b= random(67,323);
+float c= random(89,312);//random position of greenball
+float a= random(61,329);
+float d= random(65,299);//random position of blueball
+
+float e= random(.98,1.02);
+float f= random(.98,1.02);//random speed blueball
+
+float t= random(.98, 1.02);
+float o= random(.98, 1.02);//random speed greenball
+
+float ballz =b;
+float ballw =c;//greenball position
+float bally=a;
+float ballx=d;//blueball position
+float speedx=5;
+float speedy=6;//blueball speed
+float speedw=6;
+float speedz=7;//greenball speed
+
+
+void setup() {
+  size(550, 650);
+} // end set up
+
+void draw() {
+  background(n-10,m-10,l-10);//border
+  rectMode(CENTER); 
+  fill(l,m,n);
+  stroke(0);
+  rect(width/2, height/2, width-50, height-50);//background square
+  fill(#0084F5);
+  ellipse(ballx, bally, 20, 20);//blueball
+  fill(#00F591);
+  ellipse(ballz, ballw, 20, 20);//greenball
+  fill(n,m,l);
+  stroke(0);
+  rect(width-120, 120, 190, 190);//topright square
+  stroke(n,m,l);
+  rect(width-119, 119, 190, 190);
+  
+  if (mousePressed){
+    speedx = speedx *e;
+    speedy = speedy *f;
+    speedw = speedw *t;
+    speedz = speedz *o; 
+  }//ball speed randomizer
+
+  if (ballx > width-220) {//blueball bottom square bounce
+  if (bally < 226) {
+    switchdirectiony();
+  }
+  }  
+
+  if (bally < 220) {//blueball side square bounce
+  if (ballx > width-226) {
+    switchdirectionx();
+  }
+  }
+
+  if (ballz > width-220) {//greenball bottom square bounce
+  if (ballw < 226) {
+    switchdirectionw();
+  }
+  }  
+
+  if (ballw < 220) {//greenball side square bounce
+  if (ballz > width-226) {
+    switchdirectionz();
+  }
+  }
+
+  if ((ballx > width-35)||(ballx <35)) {//blueball horizontal border bounce
+  switchdirectionx();
+  } 
+
+  if ((bally > height-35)||(bally < 35)) { // blueball vertical border bounce
+  switchdirectiony();
+  }
+
+  ballx = ballx + speedx;
+  bally = bally + speedy;
+
+  if ((ballz > width-35)||(ballz <35)) { // greenball horizontal border bounce
+  switchdirectionz();
+  }
+
+  if ((ballw > height-35)||(ballw < 35)) {// greenball vertical border bounce
+  switchdirectionw();
+  } 
+
+  ballz = ballz + speedz;
+  ballw = ballw + speedw;
+}//end of void draw
+
+
+    void switchdirectionx() {
+  speedx = speedx * -1;
+}//blueball vertical bounce
+
+void switchdirectiony() {
+  speedy = speedy * -1;
+}//blueball horizontal bounce
+
+void switchdirectionz() {
+  speedz = speedz * -1;
+}//greenball vertical bounce
+
+void switchdirectionw() {
+  speedw = speedw * -1;
+}//greenball horizontal bounce
